@@ -34,7 +34,7 @@ pre: " <b> 4.3. </b> "
 
 ### Nội Dung Nổi Bật Trong Sự Kiện
 
-#### 1. Level Up Your AWS Skills with Cloud Quest and Floci
+#### 1. Level Up Your AWS Skills with Cloud Quest and Floci ( Huỳnh Thái Linh)
 Đây là chủ đề do chính em chuẩn bị và trình bày trước cộng đồng. Nội dung tập trung giải quyết "nỗi sợ" lớn nhất của các bạn mới học Cloud: **Áp lực về chi phí tài khoản (AWS Billing) và việc quên xóa tài nguyên sau khi thực hành.**
 * **AWS Cloud Quest:** Phương pháp tiếp cận Cloud theo mô hình trò chơi hóa (Gamified learning) trong không gian 3D. Người học sẽ trực tiếp giải quyết các bài toán kỹ thuật thông qua các nhiệm vụ (quests) sinh động thay vì đọc tài liệu lý thuyết khô khan.
 * **Floci - Giải pháp giả lập AWS nguồn mở cục bộ:** Công cụ cho phép xây dựng và kiểm thử kiến trúc AWS ngay trên máy tính cá nhân với chi phí hoàn toàn bằng 0.
