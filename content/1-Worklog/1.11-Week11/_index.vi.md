@@ -35,49 +35,49 @@ Trong tuần này, hệ thống tiến thêm một bước quan trọng trong vi
 * Mở bảng điều khiển IAM Console, khởi tạo role mới với tên `pharmacare-lambda-role`.
 * Áp dụng nguyên tắc đặc quyền tối thiểu (Least Privilege) thông qua việc đính kèm 3 chính sách cốt lõi: quyền ghi log CloudWatch (`AWSLambdaBasicExecutionRole`), quyền khởi tạo card mạng ENI trong VPC (`AWSLambdaVPCAccessExecutionRole`), và quyền truy xuất secret từ AWS Secrets Manager (`pharmacare-read-rds-secret-policy`).
 
-![Thiết lập IAM Role cho Lambda](/images/lam1.png)
+![Thiết lập IAM Role cho Lambda](/ThucTapAWS/images/lam1.png)
 
 #### 2. Khởi tạo Hàm Lambda Migration trong VPC
 * Khởi tạo hàm Lambda `pharmacare-db-migration` sử dụng runtime Node.js 22.x (kiến trúc x86_64).
 * Kết nối trực tiếp hàm vào 2 Private Subnets của mạng `pharmacare-vpc` và gán Security Group dành riêng cho Lambda, cho phép giao tiếp nội bộ an toàn tới máy chủ Amazon RDS PostgreSQL.
 
-![Cấu hình khởi tạo Lambda Migration](/images/lam2.png)
+![Cấu hình khởi tạo Lambda Migration](/ThucTapAWS/images/lam2.png)
 
 #### 3. Tối ưu Tài nguyên & Thời gian chờ (Timeout/Memory)
 * Các câu lệnh SQL khởi tạo cấu trúc bảng phức tạp (như người dùng, sản phẩm, giỏ hàng, và các bảng vector embedding cho AI Chatbot) đòi hỏi thời gian thực thi I/O mạng liên tục.
 * Do đó, hệ thống đã điều chỉnh bộ nhớ (Memory) lên **256 MB** và nâng thời gian chờ (Timeout) từ 3 giây mặc định lên **60 giây (1 phút)**, khắc phục hoàn toàn tình trạng lỗi ngắt kết nối giữa chừng (Timeout Exception).
 
-![Cấu hình Code Source ban đầu của Lambda](/images/lam3.png)
+![Cấu hình Code Source ban đầu của Lambda](/ThucTapAWS/images/lam3.png)
 
-![Cấu hình Timeout và Memory cho Lambda](/images/lam4.png)
+![Cấu hình Timeout và Memory cho Lambda](/ThucTapAWS/images/lam4.png)
 
 #### 4. Quản trị Cấu hình qua Biến môi trường (Environment Variables)
 * Tách biệt cấu hình hạ tầng khỏi mã nguồn bằng cách thiết lập các cặp giá trị định danh: `DB_HOST`, `DB_NAME` (`pharmacare_ai`), `DB_PORT` (`5432`), và `RDS_SECRET_ARN`.
 * Cơ chế này đảm bảo hàm Lambda tự động gọi API Secrets Manager để lấy chuỗi mật khẩu giải mã một cách động theo thời gian thực.
 
-![Thiết lập biến môi trường cho Lambda](/images/lam5.png)
+![Thiết lập biến môi trường cho Lambda](/ThucTapAWS/images/lam5.png)
 
 #### 5. Đóng gói Mã nguồn & Triển khai lên Môi trường Cloud
 * Tại môi trường VS Code cục bộ, viết mã nguồn `index.mjs` và cài đặt các thư viện phụ thuộc (`pg`, `@aws-sdk/client-secrets-manager`). Sử dụng lệnh PowerShell `Compress-Archive` để nén mã nguồn cùng `node_modules` thành gói `function.zip`.
 
-![Khởi tạo và nén mã nguồn lần 1 trong VS Code](/images/lam6.png)
+![Khởi tạo và nén mã nguồn lần 1 trong VS Code](/ThucTapAWS/images/lam6.png)
 
 * Thực hiện tải tệp `function.zip` trực tiếp lên tab Code của AWS Lambda Console.
 
-![Giao diện tải tệp nén ZIP cập nhật Lambda lần 1](/images/lam7.png)
+![Giao diện tải tệp nén ZIP cập nhật Lambda lần 1](/ThucTapAWS/images/lam7.png)
 
 * Rà soát và kiểm thử lại cấu trúc mã nguồn SQL Migration ngay trên giao diện trình biên soạn của Lambda Console để đảm bảo sự khớp nối hoàn hảo.
 
-![Kiểm tra mã nguồn Lambda sau khi update lần 1](/images/lam8.png)
+![Kiểm tra mã nguồn Lambda sau khi update lần 1](/ThucTapAWS/images/lam8.png)
 
 #### 6. Triển khai Hệ thống Xác thực Tập trung Amazon Cognito User Pool
 * **Khởi tạo User Pool & App Client:** Triển khai `pharmacare-user-pool` làm trung tâm quản lý tài khoản, hỗ trợ đầy đủ các tính năng xác minh qua Email/SMS và khôi phục mật khẩu. Tạo App Client `pharmacare-web-client` cung cấp Client ID phục vụ tích hợp với giao diện Frontend ReactJS.
 
-![Giao diện quản lý và thông tin chi tiết của Amazon Cognito User Pool](/images/cog1.png)
+![Giao diện quản lý và thông tin chi tiết của Amazon Cognito User Pool](/ThucTapAWS/images/cog1.png)
 
 * **Phân quyền Role-Based Access Control (RBAC):** Khởi tạo thành công 2 nhóm người dùng chiến lược bao gồm nhóm `Admin` (PharmaCare administrator group) đạt Precedence 1 và `Customer` (PharmaCare customer group) đạt Precedence 2 nhằm phục vụ phân tách bộ lọc API Gateway bảo mật.
 
-![Cấu hình phân chia các User Groups trong Amazon Cognito](/images/cog2.png)
+![Cấu hình phân chia các User Groups trong Amazon Cognito](/ThucTapAWS/images/cog2.png)
 
 ---
 

@@ -35,41 +35,41 @@ During this implementation cycle, the engineering core structured the public del
 * Initiated setup procedures via the Amazon S3 Storage console interface to deploy an decoupled asset container named `pharmacare-frontend-web-phu-2026`.
 * Mapped the storage cluster into the local APAC node structure (`ap-southeast-1` Singapore Region) running a standard Global Namespace general-purpose storage tier to maintain strict asset synchronization.
 
-![Configuring S3 Bucket Parameters](/images/deploy1.jpg)
+![Configuring S3 Bucket Parameters](/ThucTapAWS/images/deploy1.jpg)
 
-![Verifying Empty S3 Bucket Instance Allocation](/images/deploy2.jpg)
+![Verifying Empty S3 Bucket Instance Allocation](/ThucTapAWS/images/deploy2.jpg)
 
 #### 2. Compiling and Synchronizing Static Application Artifacts
 * Ran local deployment scripts on the project tree to render optimized production chunks.
 * Synchronized and pushed the structural layers (including the system `assets/` directories, `index.html`, `favicon.svg`, and custom vector representations `icons.svg`) straight into the S3 asset storage engine with full timestamp synchronization.
 
-![Reviewing Uploaded Static Objects in S3 Bucket](/images/deploy3.jpg)
+![Reviewing Uploaded Static Objects in S3 Bucket](/ThucTapAWS/images/deploy3.jpg)
 
 #### 3. Provisioning the Global Amazon CloudFront Distribution Network
 * Deployed a production CDN cluster layer under the deployment naming scheme `pharmacare-frontend-distribution`.
 * The newly established edge engine successfully configured its dynamic URL profile (`d3tm5364zrtmpq.cloudfront.net`), ensuring optimized global caching parameters and setting up the Default Root Object to intercept requests straight at `index.html`.
 
-![Reviewing Active CloudFront General Settings Dashboard](/images/deploy4.jpg)
+![Reviewing Active CloudFront General Settings Dashboard](/ThucTapAWS/images/deploy4.jpg)
 
 #### 4. Hardening Client-Side SPA Routes & Performing Cache Invalidation
 * Since React utilizes a Virtual DOM routing model (client-side routing), direct deep-linking attempts frequently lead to standard AWS object lookup failures.
 * Resolved this design quirk by constructing distinct Error Pages custom interception strategies: mapping code `403` and `404` anomalies to redirect straight into `/index.html` with an overridden HTTP response structure of `200 OK`.
 
-![Configuring Custom Error Pages Responses for SPA Compatibility](/images/deploy5.jpg)
+![Configuring Custom Error Pages Responses for SPA Compatibility](/ThucTapAWS/images/deploy5.jpg)
 
 * Triggered an infrastructure cache wipe request (`Invalidation ID: I22BWFD9RT2N26X729DOHWEPR9`) pointing explicitly at path pattern `/*`. This forces CloudFront to drop old cache layers across all global edge nodes and fetch the freshly deployed code from the S3 origin.
 
-![Executing Asset Cache Invalidation Tracking](/images/deploy6.png)
+![Executing Asset Cache Invalidation Tracking](/ThucTapAWS/images/deploy6.png)
 
 #### 5. Binding Identity Callback Zones & Auditing Domain Availability
 * Opened the Amazon Cognito Identity Management workspace to extend configurations for the `pharmacare-web-client` App Client.
 * Bound the verified production URL path configurations (`https://d3tm5364zrtmpq.cloudfront.net/`) directly alongside the development paths (`http://localhost:5173/`) under the **Allowed callback URLs** and **Allowed sign-out URLs** parameters, empowering the cloud UI layer to execute OAuth2 authorization routines securely.
 
-![Updating Amazon Cognito App Client Redirect Target Boundaries](/images/deploy7.png)
+![Updating Amazon Cognito App Client Redirect Target Boundaries](/ThucTapAWS/images/deploy7.png)
 
 * Navigated to Amazon Route 53 Domain Registry portals to plan domain mapping targets for the target corporate site profile (`pharmacare.ai`). The system detected an active registration lock on the primary domain and recommended fallback records to structure production DNS maps next week.
 
-![Auditing Domain Zone Registry Configurations inside Route 53](/images/deploy8.jpg)
+![Auditing Domain Zone Registry Configurations inside Route 53](/ThucTapAWS/images/deploy8.jpg)
 
 ---
 

@@ -96,8 +96,8 @@ pre: " <b> 4.3. </b> "
 * Điều em tâm đắc nhất ở Workshop là sự kết hợp hài hòa giữa các chủ đề công nghệ chuyên sâu (AWS, AI Agent, DevOps) với các bài chia sẻ thực tế về tâm lý và kỹ năng mềm. Những câu hỏi thảo luận trực tiếp từ khán giả giúp em có cơ hội nhìn nhận lại kiến thức của bản thân một cách đa chiều và hoàn thiện hơn.
 
 #### Một số hình ảnh tại sự kiện
-<img src="/images/sukien.jpg" alt="Mô tả ảnh" width="800px">
-<img src="/images/sukien2.jpg" alt="Mô tả ảnh" width="800px">
-<img src="/images/sukien4.jpg" alt="Mô tả ảnh" width="800px">
+<img src="/ThucTapAWS/images/sukien.jpg" alt="Mô tả ảnh" width="800px">
+<img src="/ThucTapAWS/images/sukien2.jpg" alt="Mô tả ảnh" width="800px">
+<img src="/ThucTapAWS/images/sukien4.jpg" alt="Mô tả ảnh" width="800px">
 
 > Đối với em, AWS First Cloud AI Journey Meet Up không đơn thuần là một buổi chia sẻ công nghệ, mà là một bước đệm quan trọng giúp em trưởng thành hơn về năng lực chuyên môn lẫn kỹ năng kết nối, tự tin hơn trên hành trình phát triển sự nghiệp.

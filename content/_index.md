@@ -26,7 +26,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From 17/04/2026 to 30/07/2026
 
-<p align="center"><img src="/images/CV.png" width="600" alt=""></p>
+<p align="center"><img src="/ThucTapAWS/images/CV.png" width="600" alt=""></p>
 
 ### Report Content
 
