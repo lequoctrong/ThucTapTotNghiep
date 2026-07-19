@@ -17,13 +17,13 @@ pre: " <b> 1.11. </b> "
 
 ### Các công việc cần triển khai trong tuần:
 
-| Thứ | Công việc | Người thực hiện | Ngày bắt đầu | Ngày hoàn thành |
-| :--- | :--- | :--- | :--- | :--- |
-| 2 | **Thiết lập IAM Role & Quyền thực thi cho Lambda:** <br> - Khởi tạo IAM Role `pharmacare-lambda-role`. <br> - Đính kèm các chính sách: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole` và custom inline policy `pharmacare-read-rds-secret-policy`. | Bạn | 13/07/2026 | 13/07/2026 |
-| 3 | **Khởi tạo & Cấu hình Hàm Lambda Migration:** <br> - Tạo hàm Lambda `pharmacare-db-migration` (Node.js 22.x, x86_64) kết nối vào 2 Private Subnets của `pharmacare-vpc`. <br> - Điều chỉnh tài nguyên: Memory `256 MB`, Timeout `60 giây` để ngăn ngắt kết nối. | Bạn | 14/07/2026 | 14/07/2026 |
-| 4 | **Đóng gói Mã nguồn & Thực thi Migration lên RDS:** <br> - Viết mã nguồn `index.mjs` tích hợp thư viện `pg` và `@aws-sdk/client-secrets-manager`. <br> - Nén gói `function.zip`, tải lên Lambda và kích hoạt tự động hóa tạo bảng trên Amazon RDS PostgreSQL. | Bạn | 15/07/2026 | 15/07/2026 |
-| 5 | **Triển khai Amazon Cognito User Pool & App Client:** <br> - Khởi tạo `pharmacare-user-pool` quản lý vòng đời tài khoản người dùng. <br> - Cấu hình App Client (Client ID) phục vụ tích hợp giao diện Frontend. | Huỳnh Minh Phú | 16/07/2026 | 16/07/2026 |
-| 6 | **Cấu hình Nhóm người dùng (Groups) & Kiểm thử Token:** <br> - Tạo các nhóm quyền hạn `Admin` và `Customer` trong Cognito. <br> - Kiểm thử luồng Đăng ký/Đăng nhập, xác thực chữ ký JWT Token và ghi nhận nhật ký hệ thống trên Amazon CloudWatch Logs. | Huỳnh Minh Phú | 17/07/2026 | 17/07/2026 |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
+| :--- | :--- | :--- | :--- |
+| 2 | **Thiết lập IAM Role & Quyền thực thi cho Lambda:** <br> - Khởi tạo IAM Role `pharmacare-lambda-role`. <br> - Đính kèm các chính sách: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole` và custom inline policy `pharmacare-read-rds-secret-policy`. | 13/07/2026 | 13/07/2026 |
+| 3 | **Khởi tạo & Cấu hình Hàm Lambda Migration:** <br> - Tạo hàm Lambda `pharmacare-db-migration` (Node.js 22.x, x86_64) kết nối vào 2 Private Subnets của `pharmacare-vpc`. <br> - Điều chỉnh tài nguyên: Memory `256 MB`, Timeout `60 giây` để ngăn ngắt kết nối. | 14/07/2026 | 14/07/2026 |
+| 4 | **Đóng gói Mã nguồn & Thực thi Migration lên RDS:** <br> - Viết mã nguồn `index.mjs` tích hợp thư viện `pg` và `@aws-sdk/client-secrets-manager`. <br> - Nén gói `function.zip`, tải lên Lambda và kích hoạt tự động hóa tạo bảng trên Amazon RDS PostgreSQL. | 15/07/2026 | 15/07/2026 |
+| 5 | **Triển khai Amazon Cognito User Pool & App Client:** <br> - Khởi tạo `pharmacare-user-pool` quản lý vòng đời tài khoản người dùng. <br> - Cấu hình App Client (Client ID) phục vụ tích hợp giao diện Frontend. | 16/07/2026 | 16/07/2026 |
+| 6 | **Cấu hình Nhóm người dùng (Groups) & Kiểm thử Token:** <br> - Tạo các nhóm quyền hạn `Admin` và `Customer` trong Cognito. <br> - Kiểm thử luồng Đăng ký/Đăng nhập, xác thực chữ ký JWT Token và ghi nhận nhật ký hệ thống trên Amazon CloudWatch Logs. | 17/07/2026 | 17/07/2026 |
 
 ---
 
@@ -83,5 +83,5 @@ Trong tuần này, hệ thống tiến thêm một bước quan trọng trong vi
 
 ### Kết quả đạt được tuần 11:
 * **Tự động hóa luồng Deployment Dữ liệu:** Thay thế hoàn toàn các thao tác tạo bảng DB thủ công tiềm ẩn rủi ro bằng kiến trúc Serverless Lambda chạy trong mạng kín VPC, đảm bảo tính nhất quán và bảo mật dữ liệu tuyệt đối.
-* **Thiết lập nền tảng Bảo mật Định danh chuẩn Doanh nghiệp:** Xây dựng thành công hệ thống xác thực tập trung Amazon Cognito bởi thành viên Huỳnh Minh Phú, sẵn sàng tích hợp cung cấp cấu trúc JSON Web Token (JWT) bảo mật cho Frontend ReactJS và API Gateway.
+* **Thiết lập nền tảng Bảo mật Định danh chuẩn Doanh nghiệp:** Xây dựng thành công hệ thống xác thực tập trung Amazon Cognito, sẵn sàng tích hợp cung cấp cấu trúc JSON Web Token (JWT) bảo mật cho Frontend ReactJS và API Gateway.
 * **Khả năng quan sát toàn diện (Observability):** Toàn bộ nhật ký thực thi migration, trạng thái tạo bảng và log xác thực người dùng đều được ghi nhận real-time trên **Amazon CloudWatch Logs**, giúp đội ngũ kỹ sư kiểm soát hệ thống chặt chẽ.

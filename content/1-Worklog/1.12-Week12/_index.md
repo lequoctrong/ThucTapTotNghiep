@@ -8,7 +8,7 @@ pre: " <b> 1.12. </b> "
 
 ### Week 12 Objectives:
 
-* **Deploy Static Frontend Web Architecture via Amazon S3:** Provision a highly available and secure Amazon S3 bucket instance optimized to store, host, and serve static production assets (`index.html`, Javascript bundles, asset structures) for the **PharmaCare AI** client-side dashboard.
+* **Deploy Static Frontend Web Architecture via Amazon S3:** Provision a highly available and secure Amazon S3 bucket instance optimized to store, host, and serve static production assets (`index.html`, JavaScript bundles, asset structures) for the **PharmaCare AI** client-side dashboard.
 * **Accelerate Global Content Delivery Network (CDN) via Amazon CloudFront:** Set up an edge-cached Amazon CloudFront distribution mapping to the S3 static origin, providing HTTPS security enforcement, low-latency client handshakes, and strict edge-level caching strategies.
 * **Resolve Client-Side SPA Routing & Custom Cache Management:** Address single-page application (SPA) client-side entry faults by structuring custom `403` and `404` error handling to cleanly fallback to `/index.html`. Handle distribution cache management using targeted system invalidation workflows.
 * **Unify Distributed Identity Integrations & Domain Management:** Synchronize production distribution endpoints directly inside the Amazon Cognito User Pool redirect boundaries, while leveraging Amazon Route 53 management portals to orchestrate custom domain resource planning.
@@ -17,13 +17,13 @@ pre: " <b> 1.12. </b> "
 
 ### Tasks to be carried out this week:
 
-| Day | Task | Assigned To | Start Date | Completion Date |
-| :--- | :--- | :--- | :--- | :--- |
-| Mon | **S3 Static Bucket Architecture Initialization:** <br> - Provision the unique static host target `pharmacare-frontend-web-phu-2026` inside the `ap-southeast-1` region. | Huỳnh Minh Phú | 20/07/2026 | 20/07/2026 |
-| Tue | **Frontend Production Compiling & Object Deployment:** <br> - Build React production static files locally and synchronize raw bundles (`assets/`, `index.html`, `favicon.svg`) directly into the target S3 asset directory. | Huỳnh Minh Phú | 21/07/2026 | 21/07/2026 |
-| Wed | **CDN CloudFront Distribution Setup:** <br> - Deploy `pharmacare-frontend-distribution` utilizing the global edge cluster framework. <br> - Assign default root configurations mapping safely to `/index.html`. | You | 22/07/2026 | 22/07/2026 |
-| Thu | **SPA Client Error Responses & Cache Invalidations:** <br> - Configure CloudFront custom error pages mapping `403`/`404` anomalies back to HTTP `200` under `/index.html`. <br> - Fire asset cache invalidation operations targeting `/*`. | You | 23/07/2026 | 23/07/2026 |
-| Fri | **Cognito Identity Integration & Route 53 Domain Planning:** <br> - Bind the active CloudFront CDN production domain into the allowed Callback and Sign-out parameters inside Cognito. <br> - Map availability checks for the `pharmacare.ai` domain zone. | You | 24/07/2026 | 24/07/2026 |
+| Day | Task | Start Date | Completion Date |
+| :--- | :--- | :--- | :--- |
+| Mon | **S3 Static Bucket Architecture Initialization:** <br> - Provision the unique static host target `pharmacare-frontend-web-phu-2026` inside the `ap-southeast-1` region. | 20/07/2026 | 20/07/2026 |
+| Tue | **Frontend Production Compiling & Object Deployment:** <br> - Build React production static files locally and synchronize raw bundles (`assets/`, `index.html`, `favicon.svg`) directly into the target S3 asset directory. | 21/07/2026 | 21/07/2026 |
+| Wed | **CDN CloudFront Distribution Setup:** <br> - Deploy `pharmacare-frontend-distribution` utilizing the global edge cluster framework. <br> - Assign default root configurations mapping safely to `/index.html`. | 22/07/2026 | 22/07/2026 |
+| Thu | **SPA Client Error Responses & Cache Invalidations:** <br> - Configure CloudFront custom error pages mapping `403`/`404` anomalies back to HTTP `200` under `/index.html`. <br> - Fire asset cache invalidation operations targeting `/*`. | 23/07/2026 | 23/07/2026 |
+| Fri | **Cognito Identity Integration & Route 53 Domain Planning:** <br> - Bind the active CloudFront CDN production domain into the allowed Callback and Sign-out parameters inside Cognito. <br> - Map availability checks for the `pharmacare.ai` domain zone. | 24/07/2026 | 24/07/2026 |
 
 ---
 
@@ -32,7 +32,7 @@ pre: " <b> 1.12. </b> "
 During this implementation cycle, the engineering core structured the public delivery layer of the ecosystem, taking the web architecture from a localized development environment into an enterprise-grade cloud production delivery path:
 
 #### 1. Provisioning the Cloud Storage Sandbox via Amazon S3
-* Initiated setup procedures via the Amazon S3 Storage console interface to deploy an decoupled asset container named `pharmacare-frontend-web-phu-2026`.
+* Initiated setup procedures via the Amazon S3 Storage console interface to deploy a decoupled asset container named `pharmacare-frontend-web-phu-2026`.
 * Mapped the storage cluster into the local APAC node structure (`ap-southeast-1` Singapore Region) running a standard Global Namespace general-purpose storage tier to maintain strict asset synchronization.
 
 ![Configuring S3 Bucket Parameters](/ThucTapTotNghiep/images/deploy1.jpg)

@@ -8,82 +8,80 @@ pre: " <b> 1.11. </b> "
 
 ### Week 11 Objectives:
 
-* **Automate Database Migration via AWS Lambda:** Deploy a Serverless architecture (AWS Lambda) operating entirely within a Private VPC to execute DDL/DML scripts, initializing the PostgreSQL database schema for the **PharmaCare AI** ecosystem without manual external intervention.
-* **Integrate Secrets Management & Execution Security:** Enforce the principle of least privilege through an IAM Role, enabling the Lambda function to dynamically decrypt and fetch the Master DB credentials from AWS Secrets Manager, completely eliminating hardcoded sensitive data in the application codebase.
-* **Build a Centralized Identity Management System:** Provision **Amazon Cognito User Pool** as the primary identity verification provider to govern user registration, authentication challenges, account verification, and JSON Web Token (JWT) issuance workflows.
-* **Configure Role-Based Access Control (RBAC):** Structure dedicated authorization groups (`Admin` and `Customer`) within Cognito, establishing the baseline to gate API Gateway endpoints and secure granular application modules.
+* **Automate Database Migration with AWS Lambda:** Deploy a Serverless architecture (AWS Lambda) running fully within an isolated private network (Private VPC) to execute DDL/DML scripts and initialize the PostgreSQL table schemas for the **PharmaCare AI** system without manual external intervention.
+* **Integrate Secrets Management & Secure the Execution Pipeline:** Enforce the principle of least privilege using an IAM Role, allowing the Lambda function to dynamically decrypt and retrieve Master DB credentials from AWS Secrets Manager, completely eliminating hardcoded sensitive data within the application codebase.
+* **Build a Centralized Identity Management System:** Deploy an **Amazon Cognito User Pool** as the primary identity governance service, managing user sign-up, sign-in, account verification workflows, and JSON Web Token (JWT) issuance.
+* **Establish Role-Based Access Control (RBAC):** Configure distinct permission groups (`Admin` and `Customer`) within Cognito, laying the security groundwork for API Gateway access control and functional authorization rules across core modules.
 
 ---
 
 ### Tasks to be carried out this week:
 
-| Day | Task | Assigned To | Start Date | Completion Date |
-| :--- | :--- | :--- | :--- | :--- |
-| Mon | **IAM Role Provisioning & Lambda Execution Permissions:** <br> - Create the IAM Role `pharmacare-lambda-role`. <br> - Attach core execution policies: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole`, and a custom inline policy `pharmacare-read-rds-secret-policy`. | You | 13/07/2026 | 13/07/2026 |
-| Tue | **Lambda Migration Function Initialization & Tuning:** <br> - Initialize the Lambda function `pharmacare-db-migration` (Node.js 22.x, x86_64) bound to 2 Private Subnets within the `pharmacare-vpc`. <br> - Adjust runtime resources: Memory `256 MB`, Timeout `60 seconds` to prevent connection drops. | You | 14/07/2026 | 14/07/2026 |
-| Wed | **Source Code Packaging & RDS Migration Execution:** <br> - Develop the `index.mjs` entry point utilizing `pg` and `@aws-sdk/client-secrets-manager` libraries. <br> - Compress the source into `function.zip`, upload it to Lambda, and trigger automated schema migration on Amazon RDS PostgreSQL. | You | 15/07/2026 | 15/07/2026 |
-| Thu | **Amazon Cognito User Pool & App Client Deployment:** <br> - Provision `pharmacare-user-pool` to manage the complete user account lifecycle. <br> - Configure the App Client (Client ID) to prepare for decoupled ReactJS Frontend integration. | Huỳnh Minh Phú | 16/07/2026 | 16/07/2026 |
-| Fri | **User Group Configuration & Token Flow Verification:** <br> - Create the strategic `Admin` and `Customer` authorization groups inside Cognito. <br> - Test the sign-up/sign-in flows, validate JWT cryptographic signatures, and audit runtime outputs via Amazon CloudWatch Logs. | Huỳnh Minh Phú | 17/07/2026 | 17/07/2026 |
+| Day | Task | Start Date | Completion Date |
+| :--- | :--- | :--- | :--- |
+| Mon | **Configure IAM Role & Lambda Execution Permissions:** <br> - Provision the `pharmacare-lambda-role` IAM role. <br> - Attach core policies: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole`, and a custom inline policy `pharmacare-read-rds-secret-policy`. | 13/07/2026 | 13/07/2026 |
+| Tue | **Initialize & Configure the Migration Lambda Function:** <br> - Provision the `pharmacare-db-migration` function (Node.js 22.x, x86_64) bound to two Private Subnets inside the `pharmacare-vpc`. <br> - Optimize runtime properties: Memory `256 MB`, Timeout `60 seconds` to prevent connection drops. | 14/07/2026 | 14/07/2026 |
+| Wed | **Bundle Source Code & Execute Migration on RDS:** <br> - Author the `index.mjs` runtime logic integrating `pg` and `@aws-sdk/client-secrets-manager` libraries. <br> - Package dependencies into `function.zip`, upload to Lambda, and trigger automated schema migration on Amazon RDS PostgreSQL. | 15/07/2026 | 15/07/2026 |
+| Thu | **Deploy Amazon Cognito User Pool & App Client:** <br> - Provision `pharmacare-user-pool` to govern user account lifecycles. <br> - Configure the App Client (Client ID) required for React frontend integration. | 16/07/2026 | 16/07/2026 |
+| Fri | **Configure User Groups & Validate Token Signatures:** <br> - Establish administrative and consumer boundaries via `Admin` and `Customer` groups within Cognito. <br> - Test SignUp/SignIn authentication loops, verify JWT token signatures, and trace runtime outputs on Amazon CloudWatch Logs. | 17/07/2026 | 17/07/2026 |
 
 ---
 
 ### Detailed Implementation:
 
-During this sprint, the engineering team took a major step forward in maturing the core Infrastructure as a Platform (IaaS) layer by automating database mutations and deploying the centralized identity security perimeter:
+During this sprint cycle, the architecture advanced to an enterprise-grade Infrastructure as a Platform level by automating core data operations and integrating a secure centralized identity management tier:
 
-#### 1. Designing IAM Role Execution Boundaries for Lambda
-* Opened the AWS IAM Console to create a secure service execution policy named `pharmacare-lambda-role`.
-* Enforced tight security baselines using the least privilege principle by attaching 3 distinct operational permissions policies: CloudWatch emission rights (`AWSLambdaBasicExecutionRole`), Elastic Network Interface (ENI) attachment permissions inside isolated networks (`AWSLambdaVPCAccessExecutionRole`), and dynamic decryption policies targeting database secrets (`pharmacare-read-rds-secret-policy`).
+#### 1. Setting Up IAM Role Execution Permissions for Lambda
+* Opened the IAM Management Console to provision a new execution role named `pharmacare-lambda-role`.
+* Enforced the principle of least privilege by attaching three key baseline policies: CloudWatch telemetry access (`AWSLambdaBasicExecutionRole`), ENI network interface attachment within a VPC (`AWSLambdaVPCAccessExecutionRole`), and dynamic runtime reading permissions for target secrets within AWS Secrets Manager (`pharmacare-read-rds-secret-policy`).
 
 ![Configuring IAM Role for Lambda](/ThucTapTotNghiep/images/lam1.png)
 
-#### 2. Initializing the VPC-Bound Lambda Migration Endpoint
-* Provisioned the `pharmacare-db-migration` serverless runner configured against a Node.js 22.x runtime environment (x86_64 architecture).
-* Explicitly mapped the execution engine into 2 Private Subnets managed under the `pharmacare-vpc` boundary, isolating the container within a tailored Security Group that permits secure relational queries directly into the Amazon RDS PostgreSQL cluster.
+#### 2. Provisioning the Migration Lambda Function inside the VPC
+* Created the `pharmacare-db-migration` backend function running an optimized Node.js 22.x engine (x86_64 architecture).
+* Bound the function paths directly into two isolated Private Subnets of the `pharmacare-vpc` network and assigned a custom Lambda Security Group, allowing secure, firewalled data traffic to the target Amazon RDS PostgreSQL instance.
 
-![Lambda Migration Initial Provisioning Setup](/ThucTapTotNghiep/images/lam2.png)
+![Configuring Lambda Migration Function Settings](/ThucTapTotNghiep/images/lam2.png)
 
-#### 3. Optimizing Computational Allocations & Connection Boundaries (Timeout/Memory)
-* Processing robust transactional DDL/DML scripts (initializing schemas for users, products, carts, and specialized vector embeddings tailored for the GenAI Chatbot modules) requires uninterrupted network I/O lifecycles.
-* Consequently, the deployment profile was scaled up to **256 MB** of allocated memory, while adjusting the default execution boundary up to a robust **60 seconds (1 minute)** limit, completely eliminating premature socket failures and Timeout Exceptions.
+#### 3. Optimizing Runtime Resources & Timeouts
+* Executing complex raw relational database migrations (including data definitions for accounts, products, baskets, and vector embedding extensions for the AI chatbot service) demands sustained network I/O operations.
+* Therefore, the baseline compute profiles were expanded to **256 MB** of execution memory, and the default execution lifespan was extended from 3 seconds to **60 seconds (1 minute)**, fully neutralizing potential connection drop risks (`TimeoutException`).
 
-![Tuning Lambda Code Source Workspace](/ThucTapTotNghiep/images/lam3.png)
+![Reviewing Initial Lambda Code Source Sandbox](/ThucTapTotNghiep/images/lam3.png)
 
-![Tuning Lambda General Settings Allocation](/ThucTapTotNghiep/images/lam4.png)
+![Modifying Timeout and Memory Allocations for Lambda](/ThucTapTotNghiep/images/lam4.png)
 
-#### 4. Hardening Infrastructure State Management via Environment Variables
-* Separated infrastructure topology configurations from static application code layers by defining key-value application properties: `DB_HOST`, `DB_NAME` (`pharmacare_ai`), `DB_PORT` (`5432`), and `RDS_SECRET_ARN`.
-* This dynamic layout instructs the Lambda middleware to perform real-time authenticated lookups targeting Secrets Manager API microservices without storing hardcoded plain-text credentials.
+#### 4. Decoupling Architectural Settings via Environment Variables
+* Decoupled server targets from the runtime codebase by establishing static environment key-value configurations: `DB_HOST`, `DB_NAME` (`pharmacare_ai`), `DB_PORT` (`5432`), and `RDS_SECRET_ARN`.
+* This setup empowers the serverless runtime to make dynamic API calls to AWS Secrets Manager to pull, parse, and decrypt the master database passwords on the fly.
 
-![Configuring Lambda Environment Variables](/ThucTapTotNghiep/images/lam5.png)
+![Injecting Environment Variables into Lambda](/ThucTapTotNghiep/images/lam5.png)
 
-#### 5. Code Bundling & Cloud Deployment Continuous Integration
-* Working out of the local Visual Studio Code environment, engineered the `index.mjs` orchestrator script alongside active node dependencies (`pg`, `@aws-sdk/client-secrets-manager`). Utilized the native PowerShell command block `Compress-Archive` to pack the working node tree and dependency modules into a `function.zip` bundle.
+#### 5. Bundling Code Assets & Launching to Cloud Environments
+* Within the local VS Code workspace, constructed the deployment engine `index.mjs` and installed standard driver dependencies (`pg`, `@aws-sdk/client-secrets-manager`). Utilized the PowerShell utility `Compress-Archive` to pack the source code assets alongside the `node_modules` directory into a deployable package named `function.zip`.
 
-![Initializing and Archiving Lambda Build in VS Code](/ThucTapTotNghiep/images/lam6.png)
+![Bundling and Compressing Code Assets inside VS Code](/ThucTapTotNghiep/images/lam6.png)
 
-* Performed a direct filesystem upload pushing the compiled `function.zip` archive layer into the live AWS Lambda Console deployment view.
+* Uploaded the resulting `function.zip` archive directly to the Code tab within the AWS Lambda Management Console.
 
-![AWS Lambda Console Package Upload Workspace](/ThucTapTotNghiep/images/lam7.png)
+![Uploading the ZIP Package via the Lambda Code Console](/ThucTapTotNghiep/images/lam7.png)
 
-* Audited and verified the underlying structure of the SQL script compilation directly via the live integrated editor layout on the AWS Lambda management console to ensure structural harmony.
+* Reviewed the deployment code layouts and verified the SQL Migration query structures directly in the integrated console editor to ensure structural alignment.
 
-![Validating Lambda Source Files Post Initial Upload](/ThucTapTotNghiep/images/lam8.png)
+![Validating Lambda Source Files Post Update](/ThucTapTotNghiep/images/lam8.png)
 
-#### 6. Deploking Centralized Identity Security Layers via Amazon Cognito User Pool
-* **Provisioning User Pool & App Client Configurations:** Deployed `pharmacare-user-pool` to act as the core secure system catalog, embedding self-service mechanisms governing Email/SMS verification alongside workflow password resets. Generated an active App Client asset to supply the Frontend ReactJS tier with its corresponding Client ID parameters.
+#### 6. Deploying the Centralized Authentication Pipeline via Amazon Cognito User Pool
+* **Provisioning User Pool & App Client:** Deployed `pharmacare-user-pool` as the single source of truth for user data, out-of-the-box supporting Email/SMS multi-factor verifications and automated recovery loops. Created the app interface target `pharmacare-web-client`, rendering the explicit Client ID string required for ReactJS application integration.
 
-![Amazon Cognito User Pool Overview and Parameters Interface](/ThucTapTotNghiep/images/cog1.png)
+![Reviewing Amazon Cognito User Pool Status and Details Dashboard](/ThucTapTotNghiep/images/cog1.png)
 
-* **Enforcing Role-Based Access Control (RBAC):** Successfully configured 2 vital systemic authorization frameworks mapping custom business segments:
-  * `Admin`: The administrator group designated with elevated credentials targeting product listings, operational logistics, and reporting matrix views (assigned Precedence 1).
-  * `Customer`: The standard consumer segment holding specific tokens to orchestrate store purchases and trigger interactive AI Chatbot pipelines (assigned Precedence 2).
+* **Enforcing Role-Based Access Control (RBAC):** Successfully instantiated two operational groups: the administrative boundary `Admin` mapping to Precedence 1, and the general customer tier `Customer` mapping to Precedence 2, preparing the system for secure token evaluation downstream at the API Gateway level.
 
-![Configuring User Groups Layout Within Amazon Cognito](/ThucTapTotNghiep/images/cog2.png)
+![Configuring User Group Precedence inside Amazon Cognito](/ThucTapTotNghiep/images/cog2.png)
 
 ---
 
 ### Week 11 Achievements:
-* **Automated Data Deployment Lifecycle:** Completely replaced risk-prone manual table mutations with an isolated Serverless Lambda routine running inside private VPC spaces, guaranteeing data consistency and zero perimeter exposure.
-* **Enterprise Identity Perimeter Alignment:** Successfully finalized the Amazon Cognito authentication baseline under engineer Huỳnh Minh Phú's jurisdiction, providing immediate security token services (JWT) ready for downstream ReactJS Frontend and API Gateway enforcement.
-* **Unified Observability Architecture:** Entire execution paths, schema mutations logs, and identity workflows are tracked in real-time via **Amazon CloudWatch Logs**, ensuring complete system visibility and debugging insights for the engineering squad.
+* **Automated Data Deployment Ingestion:** Replaced error-prone, manual shell-driven table creation steps with an isolated Serverless Lambda function processing schemas internally inside the private VPC, achieving absolute database protection.
+* **Production-Grade Identity Management Setup:** Successfully established the centralized Amazon Cognito authorization engine, preparing the ecosystem to deliver secure, signed JSON Web Tokens (JWT) for both the ReactJS UI layout and API Gateway filtering layers.
+* **End-to-End System Observability:** All execution records, runtime schema generation processes, and client validation tasks emit structured traces in real time to **Amazon CloudWatch Logs**, keeping the operational baseline fully transparent.
