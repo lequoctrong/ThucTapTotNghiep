@@ -19,11 +19,11 @@ pre: " <b> 1.11. </b> "
 
 | Day | Task | Start Date | Completion Date |
 | :--- | :--- | :--- | :--- |
-| Mon | **Configure IAM Role & Lambda Execution Permissions:** <br> - Provision the `pharmacare-lambda-role` IAM role. <br> - Attach core policies: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole`, and a custom inline policy `pharmacare-read-rds-secret-policy`. | 13/07/2026 | 13/07/2026 |
-| Tue | **Initialize & Configure the Migration Lambda Function:** <br> - Provision the `pharmacare-db-migration` function (Node.js 22.x, x86_64) bound to two Private Subnets inside the `pharmacare-vpc`. <br> - Optimize runtime properties: Memory `256 MB`, Timeout `60 seconds` to prevent connection drops. | 14/07/2026 | 14/07/2026 |
-| Wed | **Bundle Source Code & Execute Migration on RDS:** <br> - Author the `index.mjs` runtime logic integrating `pg` and `@aws-sdk/client-secrets-manager` libraries. <br> - Package dependencies into `function.zip`, upload to Lambda, and trigger automated schema migration on Amazon RDS PostgreSQL. | 15/07/2026 | 15/07/2026 |
-| Thu | **Deploy Amazon Cognito User Pool & App Client:** <br> - Provision `pharmacare-user-pool` to govern user account lifecycles. <br> - Configure the App Client (Client ID) required for React frontend integration. | 16/07/2026 | 16/07/2026 |
-| Fri | **Configure User Groups & Validate Token Signatures:** <br> - Establish administrative and consumer boundaries via `Admin` and `Customer` groups within Cognito. <br> - Test SignUp/SignIn authentication loops, verify JWT token signatures, and trace runtime outputs on Amazon CloudWatch Logs. | 17/07/2026 | 17/07/2026 |
+| Mon | **Configure IAM Role & Lambda Execution Permissions:** <br> - Provision the `pharmacare-lambda-role` IAM role. <br> - Attach core policies: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole`, and a custom inline policy `pharmacare-read-rds-secret-policy`. | 29/06/2026 | 29/06/2026 |
+| Tue | **Initialize & Configure the Migration Lambda Function:** <br> - Provision the `pharmacare-db-migration` function (Node.js 22.x, x86_64) bound to two Private Subnets inside the `pharmacare-vpc`. <br> - Optimize runtime properties: Memory `256 MB`, Timeout `60 seconds` to prevent connection drops. | 30/06/2026 | 30/06/2026 |
+| Wed | **Bundle Source Code & Execute Migration on RDS:** <br> - Author the `index.mjs` runtime logic integrating `pg` and `@aws-sdk/client-secrets-manager` libraries. <br> - Package dependencies into `function.zip`, upload to Lambda, and trigger automated schema migration on Amazon RDS PostgreSQL. | 01/07/2026 | 02/07/2026 |
+| Thu | **Deploy Amazon Cognito User Pool & App Client:** <br> - Provision `pharmacare-user-pool` to govern user account lifecycles. <br> - Configure the App Client (Client ID) required for React frontend integration. | 02/07/2026 | 04/07/2026 |
+| Fri | **Configure User Groups & Validate Token Signatures:** <br> - Establish administrative and consumer boundaries via `Admin` and `Customer` groups within Cognito. <br> - Test SignUp/SignIn authentication loops, verify JWT token signatures, and trace runtime outputs on Amazon CloudWatch Logs. | 02/07/2026 | 05/07/2026 |
 
 ---
 

@@ -19,11 +19,11 @@ pre: " <b> 1.11. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
 | :--- | :--- | :--- | :--- |
-| 2 | **Thiết lập IAM Role & Quyền thực thi cho Lambda:** <br> - Khởi tạo IAM Role `pharmacare-lambda-role`. <br> - Đính kèm các chính sách: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole` và custom inline policy `pharmacare-read-rds-secret-policy`. | 13/07/2026 | 13/07/2026 |
-| 3 | **Khởi tạo & Cấu hình Hàm Lambda Migration:** <br> - Tạo hàm Lambda `pharmacare-db-migration` (Node.js 22.x, x86_64) kết nối vào 2 Private Subnets của `pharmacare-vpc`. <br> - Điều chỉnh tài nguyên: Memory `256 MB`, Timeout `60 giây` để ngăn ngắt kết nối. | 14/07/2026 | 14/07/2026 |
-| 4 | **Đóng gói Mã nguồn & Thực thi Migration lên RDS:** <br> - Viết mã nguồn `index.mjs` tích hợp thư viện `pg` và `@aws-sdk/client-secrets-manager`. <br> - Nén gói `function.zip`, tải lên Lambda và kích hoạt tự động hóa tạo bảng trên Amazon RDS PostgreSQL. | 15/07/2026 | 15/07/2026 |
-| 5 | **Triển khai Amazon Cognito User Pool & App Client:** <br> - Khởi tạo `pharmacare-user-pool` quản lý vòng đời tài khoản người dùng. <br> - Cấu hình App Client (Client ID) phục vụ tích hợp giao diện Frontend. | 16/07/2026 | 16/07/2026 |
-| 6 | **Cấu hình Nhóm người dùng (Groups) & Kiểm thử Token:** <br> - Tạo các nhóm quyền hạn `Admin` và `Customer` trong Cognito. <br> - Kiểm thử luồng Đăng ký/Đăng nhập, xác thực chữ ký JWT Token và ghi nhận nhật ký hệ thống trên Amazon CloudWatch Logs. | 17/07/2026 | 17/07/2026 |
+| 2 | **Thiết lập IAM Role & Quyền thực thi cho Lambda:** <br> - Khởi tạo IAM Role `pharmacare-lambda-role`. <br> - Đính kèm các chính sách: `AWSLambdaBasicExecutionRole`, `AWSLambdaVPCAccessExecutionRole` và custom inline policy `pharmacare-read-rds-secret-policy`. | 29/06/2026 | 29/06/2026 |
+| 3 | **Khởi tạo & Cấu hình Hàm Lambda Migration:** <br> - Tạo hàm Lambda `pharmacare-db-migration` (Node.js 22.x, x86_64) kết nối vào 2 Private Subnets của `pharmacare-vpc`. <br> - Điều chỉnh tài nguyên: Memory `256 MB`, Timeout `60 giây` để ngăn ngắt kết nối. | 30/06/2026 | 30/06/2026 |
+| 4 | **Đóng gói Mã nguồn & Thực thi Migration lên RDS:** <br> - Viết mã nguồn `index.mjs` tích hợp thư viện `pg` và `@aws-sdk/client-secrets-manager`. <br> - Nén gói `function.zip`, tải lên Lambda và kích hoạt tự động hóa tạo bảng trên Amazon RDS PostgreSQL. | 01/07/2026 | 02/07/2026 |
+| 5 | **Triển khai Amazon Cognito User Pool & App Client:** <br> - Khởi tạo `pharmacare-user-pool` quản lý vòng đời tài khoản người dùng. <br> - Cấu hình App Client (Client ID) phục vụ tích hợp giao diện Frontend. | 02/07/2026 | 04/07/2026 |
+| 6 | **Cấu hình Nhóm người dùng (Groups) & Kiểm thử Token:** <br> - Tạo các nhóm quyền hạn `Admin` và `Customer` trong Cognito. <br> - Kiểm thử luồng Đăng ký/Đăng nhập, xác thực chữ ký JWT Token và ghi nhận nhật ký hệ thống trên Amazon CloudWatch Logs. | 02/07/2026 | 05/07/2026 |
 
 ---
 

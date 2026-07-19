@@ -19,11 +19,11 @@ pre: " <b> 1.12. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành |
 | :--- | :--- | :--- | :--- |
-| 2 | **Khởi tạo kiến trúc S3 Static Bucket:** <br> - Cấu hình khởi tạo tài nguyên lưu trữ tĩnh độc nhất `pharmacare-frontend-web-phu-2026` tại khu vực `ap-southeast-1`. | 20/07/2026 | 20/07/2026 |
-| 3 | **Biên dịch Frontend Production & Triển khai Đối tượng:** <br> - Biên dịch các file tĩnh React production tại môi trường local và đồng bộ hóa các gói raw bundle (`assets/`, `index.html`, `favicon.svg`) trực tiếp vào thư mục asset S3 mục tiêu. | 21/07/2026 | 21/07/2026 |
-| 4 | **Thiết lập CDN CloudFront Distribution:** <br> - Triển khai mạng lưới `pharmacare-frontend-distribution` sử dụng nền tảng cluster edge toàn cầu. <br> - Chỉ định cấu hình Default Root Object trỏ an toàn về `/index.html`. | 22/07/2026 | 22/07/2026 |
-| 5 | **Cấu hình Phản hồi lỗi SPA & Xóa bộ nhớ đệm CDN:** <br> - Cấu hình các trang lỗi tùy chỉnh của CloudFront để chuyển đổi các bất thường `403`/`404` quay về mã HTTP `200` tại `/index.html`. <br> - Kích hoạt tác vụ xóa cache asset (invalidation) nhắm mục tiêu vào đường dẫn `/*`. | 23/07/2026 | 23/07/2026 |
-| 6 | **Tích hợp Định danh Cognito & Lên kế hoạch Domain Route 53:** <br> - Ràng buộc tên miền production CloudFront CDN đang hoạt động vào các tham số Callback và Sign-out được cho phép trong Cognito. <br> - Kiểm tra tính khả dụng của vùng tên miền `pharmacare.ai`. | 24/07/2026 | 24/07/2026 |
+| 2 | **Khởi tạo kiến trúc S3 Static Bucket:** <br> - Cấu hình khởi tạo tài nguyên lưu trữ tĩnh độc nhất `pharmacare-frontend-web-phu-2026` tại khu vực `ap-southeast-1`. | 06/07/2026 | 07/07/2026 |
+| 3 | **Biên dịch Frontend Production & Triển khai Đối tượng:** <br> - Biên dịch các file tĩnh React production tại môi trường local và đồng bộ hóa các gói raw bundle (`assets/`, `index.html`, `favicon.svg`) trực tiếp vào thư mục asset S3 mục tiêu. | 07/07/2026 | 08/07/2026 |
+| 4 | **Thiết lập CDN CloudFront Distribution:** <br> - Triển khai mạng lưới `pharmacare-frontend-distribution` sử dụng nền tảng cluster edge toàn cầu. <br> - Chỉ định cấu hình Default Root Object trỏ an toàn về `/index.html`. | 08/07/2026 | 09/07/2026 |
+| 5 | **Cấu hình Phản hồi lỗi SPA & Xóa bộ nhớ đệm CDN:** <br> - Cấu hình các trang lỗi tùy chỉnh của CloudFront để chuyển đổi các bất thường `403`/`404` quay về mã HTTP `200` tại `/index.html`. <br> - Kích hoạt tác vụ xóa cache asset (invalidation) nhắm mục tiêu vào đường dẫn `/*`. | 08/07/2026 | 10/07/2026 |
+| 6 | **Tích hợp Định danh Cognito & Lên kế hoạch Domain Route 53:** <br> - Ràng buộc tên miền production CloudFront CDN đang hoạt động vào các tham số Callback và Sign-out được cho phép trong Cognito. <br> - Kiểm tra tính khả dụng của vùng tên miền `pharmacare.ai`. | 10/07/2026 | 11/07/2026 |
 
 ---
 
