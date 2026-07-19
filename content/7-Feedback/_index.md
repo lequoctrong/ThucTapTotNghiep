@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
->Here, you can freely contribute your personal feedback regarding your experience in the First Cloud AI Journey program, helping the FCAJ team improve on remaining shortcomings based on the following categories:
 
 ### General Evaluation
 
