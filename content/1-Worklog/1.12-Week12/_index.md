@@ -19,11 +19,11 @@ pre: " <b> 1.12. </b> "
 
 | Day | Task | Start Date | Completion Date |
 | :--- | :--- | :--- | :--- |
-| Mon | **S3 Static Bucket Architecture Initialization:** <br> - Provision the unique static host target `pharmacare-frontend-web-phu-2026` inside the `ap-southeast-1` region. | 20/07/2026 | 20/07/2026 |
-| Tue | **Frontend Production Compiling & Object Deployment:** <br> - Build React production static files locally and synchronize raw bundles (`assets/`, `index.html`, `favicon.svg`) directly into the target S3 asset directory. | 21/07/2026 | 21/07/2026 |
-| Wed | **CDN CloudFront Distribution Setup:** <br> - Deploy `pharmacare-frontend-distribution` utilizing the global edge cluster framework. <br> - Assign default root configurations mapping safely to `/index.html`. | 22/07/2026 | 22/07/2026 |
-| Thu | **SPA Client Error Responses & Cache Invalidations:** <br> - Configure CloudFront custom error pages mapping `403`/`404` anomalies back to HTTP `200` under `/index.html`. <br> - Fire asset cache invalidation operations targeting `/*`. | 23/07/2026 | 23/07/2026 |
-| Fri | **Cognito Identity Integration & Route 53 Domain Planning:** <br> - Bind the active CloudFront CDN production domain into the allowed Callback and Sign-out parameters inside Cognito. <br> - Map availability checks for the `pharmacare.ai` domain zone. | 24/07/2026 | 24/07/2026 |
+| Mon | **S3 Static Bucket Architecture Initialization:** <br> - Provision the unique static host target `pharmacare-frontend-web-phu-2026` inside the `ap-southeast-1` region. | 06/07/2026 | 07/07/2026 |
+| Tue | **Frontend Production Compiling & Object Deployment:** <br> - Build React production static files locally and synchronize raw bundles (`assets/`, `index.html`, `favicon.svg`) directly into the target S3 asset directory. | 07/07/2026 | 08/07/2026 |
+| Wed | **CDN CloudFront Distribution Setup:** <br> - Deploy `pharmacare-frontend-distribution` utilizing the global edge cluster framework. <br> - Assign default root configurations mapping safely to `/index.html`. | 08/07/2026 | 09/07/2026 |
+| Thu | **SPA Client Error Responses & Cache Invalidations:** <br> - Configure CloudFront custom error pages mapping `403`/`404` anomalies back to HTTP `200` under `/index.html`. <br> - Fire asset cache invalidation operations targeting `/*`. | 08/07/2026 | 10/07/2026 |
+| Fri | **Cognito Identity Integration & Route 53 Domain Planning:** <br> - Bind the active CloudFront CDN production domain into the allowed Callback and Sign-out parameters inside Cognito. <br> - Map availability checks for the `pharmacare.ai` domain zone. | 10/07/2026 | 11/07/2026 |
 
 ---
 
