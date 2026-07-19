@@ -68,11 +68,11 @@ Amazon S3 được sử dụng làm origin lưu trữ các tệp HTML, CSS, Java
 
 5. Kiểm tra lại cấu hình và nhấn **Create bucket**.
 
-   ![Tạo S3 bucket lưu trữ frontend PharmaCare](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy1.jpg)
+   ![Tạo S3 bucket lưu trữ frontend PharmaCare](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy1.jpg)
 
 Sau khi tạo thành công, mở bucket và xác nhận giao diện **Objects** chưa có dữ liệu.
 
-   ![S3 bucket frontend được tạo thành công](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy2.jpg)
+   ![S3 bucket frontend được tạo thành công](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy2.jpg)
 
 Bucket được giữ ở trạng thái private. Người dùng không truy cập trực tiếp vào S3 mà truy cập website thông qua Amazon CloudFront. Cách triển khai này giúp che giấu origin, tăng cường bảo mật và tránh mở public bucket không cần thiết.
 
@@ -105,7 +105,7 @@ Bucket được giữ ở trạng thái private. Người dùng không truy cậ
    vite.svg
    ```
 
-   ![Tải các tệp build trong thư mục dist lên Amazon S3](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy3.jpg)
+   ![Tải các tệp build trong thư mục dist lên Amazon S3](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy3.jpg)
 
 Có thể triển khai bằng AWS CLI để đồng bộ nhanh hơn:
 
@@ -142,7 +142,7 @@ Amazon CloudFront được sử dụng để phân phối website đến ngườ
 4. Kiểm tra toàn bộ cấu hình và nhấn **Create distribution**.
 5. Chờ trạng thái distribution chuyển sang **Enabled**.
 
-   ![Tạo CloudFront Distribution cho website PharmaCare](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy4.jpg)
+   ![Tạo CloudFront Distribution cho website PharmaCare](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy4.jpg)
 
 Sau khi triển khai thành công, CloudFront cung cấp một domain có dạng:
 
@@ -188,7 +188,7 @@ React sử dụng cơ chế định tuyến phía client. Khi người dùng tru
    * **Response page path:** `/index.html`.
    * **HTTP response code:** `200`.
 
-   ![Cấu hình CloudFront Error Pages cho React Router](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy5.jpg)
+   ![Cấu hình CloudFront Error Pages cho React Router](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy5.jpg)
 
 Sau khi cấu hình, các URL sau vẫn được CloudFront trả về ứng dụng React:
 
@@ -223,7 +223,7 @@ CloudFront có thể tiếp tục phục vụ bản build cũ do nội dung đã
 5. Nhấn **Create invalidation**.
 6. Chờ trạng thái chuyển từ `In progress` sang `Completed`.
 
-   ![Tạo CloudFront Invalidation sau khi cập nhật frontend](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy6.png)
+   ![Tạo CloudFront Invalidation sau khi cập nhật frontend](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy6.png)
 
 Có thể thực hiện bằng AWS CLI:
 
@@ -279,7 +279,7 @@ Sau khi frontend có CloudFront domain, cần cập nhật Amazon Cognito để 
 
 8. Nhấn **Save changes**.
 
-   ![Cập nhật Callback URL và Sign-out URL trong Amazon Cognito](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy7.png)
+   ![Cập nhật Callback URL và Sign-out URL trong Amazon Cognito](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy7.png)
 
 Khi sử dụng domain riêng, cần bổ sung domain đó vào cả callback URL và sign-out URL. URL phải khớp chính xác giao thức, tên miền, port và đường dẫn; nếu không, Cognito có thể trả về lỗi `redirect_mismatch`.
 
@@ -302,7 +302,7 @@ Amazon Route 53 được sử dụng để tìm kiếm, đăng ký và quản l�
 9. Bật hoặc kiểm tra tính năng bảo vệ thông tin đăng ký nếu được hỗ trợ.
 10. Hoàn tất thanh toán và xác minh email đăng ký.
 
-   ![Tìm kiếm và đăng ký domain cho PharmaCare trong Route 53](/ThucTapAWS/images/5-Workshop/5.6-deploy-web/deploy8.jpg)
+   ![Tìm kiếm và đăng ký domain cho PharmaCare trong Route 53](/ThucTapTotNghiep/images/5-Workshop/5.6-deploy-web/deploy8.jpg)
 
 Ảnh kiểm tra cho thấy domain được tìm kiếm có thể không còn khả dụng. Trong trường hợp này, cần chọn một domain thay thế trong danh sách gợi ý hoặc sử dụng một tên miền khác phù hợp với thương hiệu PharmaCare.
 

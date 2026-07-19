@@ -14,7 +14,7 @@ Bài viết này sẽ chia sẻ lại những góc nhìn thú vị từ bản c�
 
 Nhìn vào lịch sử phát triển của Well-Architected Framework, chúng ta có thể thấy rõ sự chuyển mình liên tục để bám sát các thực tiễn vận hành thực tế (best practices):
 
-![Lịch sử phát triển AWS Well-Architected Framework](/ThucTapAWS/images/Well-Architected-History-Dark.jpg)
+![Lịch sử phát triển AWS Well-Architected Framework](/ThucTapTotNghiep/images/Well-Architected-History-Dark.jpg)
 *Hình 1: Dòng thời gian phát triển của AWS Well-Architected Framework qua các năm.*
 
 * **2012:** Khởi nguồn những khái niệm đầu tiên về Well-Architected.
@@ -42,7 +42,7 @@ Hiện tại, WAF bao gồm 6 trụ cột:
 Một sai lầm kinh điển khi tiếp cận Well-Architected Framework là nghĩ rằng bộ khung này chỉ dành riêng cho các kỹ sư Solutions Architect hoặc DevOps. Thực tế, bản cập nhật mới của AWS ngày càng nhấn mạnh vào tính kết nối toàn diện trong doanh nghiệp.
 
 <div align="center">
-  <img src="/ThucTapAWS/images/blog.jpg" width="70%" alt="Mối quan hệ giữa Kỹ thuật, Tài chính và Ban điều hành">
+  <img src="/ThucTapTotNghiep/images/blog.jpg" width="70%" alt="Mối quan hệ giữa Kỹ thuật, Tài chính và Ban điều hành">
 </div>
 
 *Hình 2: Luồng thông tin xuyên suốt giữa các bộ phận theo tư duy Well-Architected.*

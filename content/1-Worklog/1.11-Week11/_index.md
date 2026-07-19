@@ -35,51 +35,51 @@ During this sprint, the engineering team took a major step forward in maturing t
 * Opened the AWS IAM Console to create a secure service execution policy named `pharmacare-lambda-role`.
 * Enforced tight security baselines using the least privilege principle by attaching 3 distinct operational permissions policies: CloudWatch emission rights (`AWSLambdaBasicExecutionRole`), Elastic Network Interface (ENI) attachment permissions inside isolated networks (`AWSLambdaVPCAccessExecutionRole`), and dynamic decryption policies targeting database secrets (`pharmacare-read-rds-secret-policy`).
 
-![Configuring IAM Role for Lambda](/ThucTapAWS/images/lam1.png)
+![Configuring IAM Role for Lambda](/ThucTapTotNghiep/images/lam1.png)
 
 #### 2. Initializing the VPC-Bound Lambda Migration Endpoint
 * Provisioned the `pharmacare-db-migration` serverless runner configured against a Node.js 22.x runtime environment (x86_64 architecture).
 * Explicitly mapped the execution engine into 2 Private Subnets managed under the `pharmacare-vpc` boundary, isolating the container within a tailored Security Group that permits secure relational queries directly into the Amazon RDS PostgreSQL cluster.
 
-![Lambda Migration Initial Provisioning Setup](/ThucTapAWS/images/lam2.png)
+![Lambda Migration Initial Provisioning Setup](/ThucTapTotNghiep/images/lam2.png)
 
 #### 3. Optimizing Computational Allocations & Connection Boundaries (Timeout/Memory)
 * Processing robust transactional DDL/DML scripts (initializing schemas for users, products, carts, and specialized vector embeddings tailored for the GenAI Chatbot modules) requires uninterrupted network I/O lifecycles.
 * Consequently, the deployment profile was scaled up to **256 MB** of allocated memory, while adjusting the default execution boundary up to a robust **60 seconds (1 minute)** limit, completely eliminating premature socket failures and Timeout Exceptions.
 
-![Tuning Lambda Code Source Workspace](/ThucTapAWS/images/lam3.png)
+![Tuning Lambda Code Source Workspace](/ThucTapTotNghiep/images/lam3.png)
 
-![Tuning Lambda General Settings Allocation](/ThucTapAWS/images/lam4.png)
+![Tuning Lambda General Settings Allocation](/ThucTapTotNghiep/images/lam4.png)
 
 #### 4. Hardening Infrastructure State Management via Environment Variables
 * Separated infrastructure topology configurations from static application code layers by defining key-value application properties: `DB_HOST`, `DB_NAME` (`pharmacare_ai`), `DB_PORT` (`5432`), and `RDS_SECRET_ARN`.
 * This dynamic layout instructs the Lambda middleware to perform real-time authenticated lookups targeting Secrets Manager API microservices without storing hardcoded plain-text credentials.
 
-![Configuring Lambda Environment Variables](/ThucTapAWS/images/lam5.png)
+![Configuring Lambda Environment Variables](/ThucTapTotNghiep/images/lam5.png)
 
 #### 5. Code Bundling & Cloud Deployment Continuous Integration
 * Working out of the local Visual Studio Code environment, engineered the `index.mjs` orchestrator script alongside active node dependencies (`pg`, `@aws-sdk/client-secrets-manager`). Utilized the native PowerShell command block `Compress-Archive` to pack the working node tree and dependency modules into a `function.zip` bundle.
 
-![Initializing and Archiving Lambda Build in VS Code](/ThucTapAWS/images/lam6.png)
+![Initializing and Archiving Lambda Build in VS Code](/ThucTapTotNghiep/images/lam6.png)
 
 * Performed a direct filesystem upload pushing the compiled `function.zip` archive layer into the live AWS Lambda Console deployment view.
 
-![AWS Lambda Console Package Upload Workspace](/ThucTapAWS/images/lam7.png)
+![AWS Lambda Console Package Upload Workspace](/ThucTapTotNghiep/images/lam7.png)
 
 * Audited and verified the underlying structure of the SQL script compilation directly via the live integrated editor layout on the AWS Lambda management console to ensure structural harmony.
 
-![Validating Lambda Source Files Post Initial Upload](/ThucTapAWS/images/lam8.png)
+![Validating Lambda Source Files Post Initial Upload](/ThucTapTotNghiep/images/lam8.png)
 
 #### 6. Deploking Centralized Identity Security Layers via Amazon Cognito User Pool
 * **Provisioning User Pool & App Client Configurations:** Deployed `pharmacare-user-pool` to act as the core secure system catalog, embedding self-service mechanisms governing Email/SMS verification alongside workflow password resets. Generated an active App Client asset to supply the Frontend ReactJS tier with its corresponding Client ID parameters.
 
-![Amazon Cognito User Pool Overview and Parameters Interface](/ThucTapAWS/images/cog1.png)
+![Amazon Cognito User Pool Overview and Parameters Interface](/ThucTapTotNghiep/images/cog1.png)
 
 * **Enforcing Role-Based Access Control (RBAC):** Successfully configured 2 vital systemic authorization frameworks mapping custom business segments:
   * `Admin`: The administrator group designated with elevated credentials targeting product listings, operational logistics, and reporting matrix views (assigned Precedence 1).
   * `Customer`: The standard consumer segment holding specific tokens to orchestrate store purchases and trigger interactive AI Chatbot pipelines (assigned Precedence 2).
 
-![Configuring User Groups Layout Within Amazon Cognito](/ThucTapAWS/images/cog2.png)
+![Configuring User Groups Layout Within Amazon Cognito](/ThucTapTotNghiep/images/cog2.png)
 
 ---
 

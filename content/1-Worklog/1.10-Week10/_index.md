@@ -32,7 +32,7 @@ During this sprint, the engineering team focused on building the Backend layer o
 #### System Architecture Overview
 Below is the comprehensive AWS cloud infrastructure layout deployed to handle secure API routing, compute execution layers, generative AI orchestration, and relational/vector storage synchronization:
 
-![Pharmacare AI System Architecture Diagram](/ThucTapAWS/images/kientruc.jpg)
+![Pharmacare AI System Architecture Diagram](/ThucTapTotNghiep/images/kientruc.jpg)
 
 #### 1. Backend Project Initialization
 

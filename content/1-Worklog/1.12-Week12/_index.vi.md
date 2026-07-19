@@ -35,41 +35,41 @@ Trong chu kỳ triển khai tuần này, đội ngũ kỹ sư hạ tầng đã x
 * Khởi động quy trình thiết lập thông qua giao diện điều khiển Amazon S3 Storage để triển khai một container chứa asset độc lập mang tên `pharmacare-frontend-web-phu-2026`.
 * Ánh xạ vùng lưu trữ vào cấu trúc node APAC tại địa phương (`ap-southeast-1` Vùng Singapore) chạy một storage tier mục đích chung Global Namespace tiêu chuẩn để duy trì đồng bộ hóa asset nghiêm ngặt.
 
-![Cấu hình các tham số S3 Bucket](/ThucTapAWS/images/deploy1.jpg)
+![Cấu hình các tham số S3 Bucket](/ThucTapTotNghiep/images/deploy1.jpg)
 
-![Xác nhận cấp phát instance S3 Bucket trống ban đầu](/ThucTapAWS/images/deploy2.jpg)
+![Xác nhận cấp phát instance S3 Bucket trống ban đầu](/ThucTapTotNghiep/images/deploy2.jpg)
 
 #### 2. Biên dịch và đồng bộ hóa các sản phẩm tĩnh của ứng dụng
 * Chạy các script deployment tại local trên source code dự án để kết xuất các package chunk đã được tối ưu hóa cho production.
 * Đồng bộ hóa và đẩy các lớp cấu trúc (bao gồm các thư mục hệ thống `assets/`, `index.html`, `favicon.svg`, và các định dạng vector tùy chỉnh `icons.svg`) trực tiếp vào engine lưu trữ asset S3 với sự đồng bộ timestamp đầy đủ.
 
-![Kiểm tra các đối tượng tĩnh đã tải lên trong S3 Bucket](/ThucTapAWS/images/deploy3.jpg)
+![Kiểm tra các đối tượng tĩnh đã tải lên trong S3 Bucket](/ThucTapTotNghiep/images/deploy3.jpg)
 
 #### 3. Triển khai mạng lưới phân phối toàn cầu Amazon CloudFront Distribution
 * Triển khai một lớp CDN cluster cho môi trường production dưới tên nhận diện hệ thống `pharmacare-frontend-distribution`.
 * Engine tại các edge node vừa thiết lập đã cấu hình thành công profile URL động (`d3tm5364zrtmpq.cloudfront.net`), đảm bảo các tham số tối ưu hóa bộ nhớ đệm toàn cầu và thiết lập Default Root Object để đánh chặn các yêu cầu trực tiếp tại tệp `index.html`.
 
-![Kiểm tra trang tổng quan cấu hình chung của CloudFront](/ThucTapAWS/images/deploy4.jpg)
+![Kiểm tra trang tổng quan cấu hình chung của CloudFront](/ThucTapTotNghiep/images/deploy4.jpg)
 
 #### 4. Tối ưu hóa các tuyến định tuyến SPA Client-Side & Thực hiện Xóa bộ nhớ đệm (Invalidation)
 * Do React sử dụng mô hình định tuyến Virtual DOM (client-side routing), các hoạt động truy cập liên kết sâu (deep-linking) trực tiếp thường dẫn đến các lỗi tìm kiếm đối tượng tiêu chuẩn của AWS.
 * Giải quyết triệt để vấn đề kiến trúc này bằng cách xây dựng các chiến lược đánh chặn tùy chỉnh trong Error Pages: ánh xạ các mã bất thường `403` và `404` để định hướng trực tiếp vào `/index.html` đi kèm một cấu trúc ghi đè phản hồi HTTP thành `200 OK`.
 
-![Cấu hình phản hồi trang lỗi tùy chỉnh cho tính tương thích SPA](/ThucTapAWS/images/deploy5.jpg)
+![Cấu hình phản hồi trang lỗi tùy chỉnh cho tính tương thích SPA](/ThucTapTotNghiep/images/deploy5.jpg)
 
 * Kích hoạt một yêu cầu xóa cache hạ tầng (`Invalidation ID: I22BWFD9RT2N26X729DOHWEPR9`) chỉ định rõ ràng cho pattern đường dẫn `/*`. Thao tác này buộc CloudFront hủy bỏ các lớp cache cũ trên tất cả các edge node toàn cầu và truy xuất mã nguồn mới nhất từ S3 origin.
 
-![Thực hiện theo dõi tác vụ xóa bộ nhớ đệm Asset Cache Invalidation](/ThucTapAWS/images/deploy6.png)
+![Thực hiện theo dõi tác vụ xóa bộ nhớ đệm Asset Cache Invalidation](/ThucTapTotNghiep/images/deploy6.png)
 
 #### 5. Ràng buộc các vùng Callback định danh & Kiểm tra tính khả dụng của Tên miền
 * Mở không gian làm việc Amazon Cognito Identity Management để mở rộng cấu hình cho App Client `pharmacare-web-client`.
 * Ràng buộc các cấu hình đường dẫn URL production đã xác thực (`https://d3tm5364zrtmpq.cloudfront.net/`) trực tiếp song song với các đường dẫn môi trường phát triển local (`http://localhost:5173/`) dưới các bộ tham số **Allowed callback URLs** và **Allowed sign-out URLs**, cho phép lớp UI cloud thực hiện các quy trình ủy quyền OAuth2 một cách an toàn.
 
-![Cập nhật ranh giới chuyển hướng Amazon Cognito App Client](/ThucTapAWS/images/deploy7.png)
+![Cập nhật ranh giới chuyển hướng Amazon Cognito App Client](/ThucTapTotNghiep/images/deploy7.png)
 
 * Di chuyển đến cổng đăng ký tên miền Amazon Route 53 để lên kế hoạch ánh xạ mục tiêu cho domain doanh nghiệp (`pharmacare.ai`). Hệ thống phát hiện trạng thái lock đăng ký hiện tại trên tên miền chính và khuyến nghị các bản ghi dự phòng để thiết lập sơ đồ DNS production vào tuần tới.
 
-![Kiểm tra cấu hình đăng ký vùng Domain trong Route 53](/ThucTapAWS/images/deploy8.jpg)
+![Kiểm tra cấu hình đăng ký vùng Domain trong Route 53](/ThucTapTotNghiep/images/deploy8.jpg)
 
 ---
 

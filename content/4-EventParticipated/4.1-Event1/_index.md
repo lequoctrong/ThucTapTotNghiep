@@ -96,8 +96,8 @@ Attending this Meet Up was an incredibly enriching learning opportunity that pro
 * What I appreciated most about the workshop was its perfect balance between deep technical topics (AWS, AI Agents, DevOps) and real-world behavioral science. The open, welcoming atmosphere allowed me to easily engage, ask questions, and learn from the actual engineering triumphs and struggles of industry mentors and peers.
 
 #### Event Gallery
-<img src="/ThucTapAWS/images/sukien.jpg" alt="Event Image 1" width="800px">
-<img src="/ThucTapAWS/images/sukien2.jpg" alt="Event Image 2" width="800px">
-<img src="/ThucTapAWS/images/sukien4.jpg" alt="Event Image 3" width="800px">
+<img src="/ThucTapTotNghiep/images/sukien.jpg" alt="Event Image 1" width="800px">
+<img src="/ThucTapTotNghiep/images/sukien2.jpg" alt="Event Image 2" width="800px">
+<img src="/ThucTapTotNghiep/images/sukien4.jpg" alt="Event Image 3" width="800px">
 
 > To me, the AWS First Cloud AI Journey Meet Up was far more than a standard tech seminar; it acted as a vital catalyst that helped refine both my cloud engineering perspective and essential soft skills, keeping me motivated and confident on my professional journey.

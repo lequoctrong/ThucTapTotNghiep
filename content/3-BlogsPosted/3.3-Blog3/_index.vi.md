@@ -37,7 +37,7 @@ Nhờ vậy, lập trình viên và tester vẫn có thể sử dụng dữ li�
 
 Khi xem sơ đồ trên, mình hiểu quy trình hoạt động như sau:
 
-![Sơ đồ quy trình hoạt động](/ThucTapAWS/images/blog3.jpg)
+![Sơ đồ quy trình hoạt động](/ThucTapTotNghiep/images/blog3.jpg)
 
 1. **EventBridge Scheduler:** Dịch vụ này sẽ tự động kích hoạt quy trình theo lịch đã cấu hình, giúp không cần chạy thủ công mỗi lần cần làm mới dữ liệu.
 2. **Restore Snapshot:** Hệ thống sẽ lấy Snapshot từ cơ sở dữ liệu Production và khôi phục thành một RDS Instance tạm để thực hiện các bước tiếp theo.
