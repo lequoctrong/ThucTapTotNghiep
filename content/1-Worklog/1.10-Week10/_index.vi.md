@@ -32,7 +32,7 @@ Trong tuần này, đội ngũ kỹ sư tập trung xây dựng tầng Backend c
 #### Tổng quan về kiến trúc hệ thống
 Dưới đây là sơ đồ bố trí hạ tầng đám mây AWS toàn diện được triển khai để xử lý định tuyến API bảo mật, các lớp thực thi tính toán, điều phối AI tạo sinh, và đồng bộ hóa bộ lưu trữ quan hệ/vector:
 
-![Sơ đồ kiến trúc hệ thống Pharmacare AI](/ThucTapTotNghiep/images/kientruc.jpg)
+![Sơ đồ kiến trúc hệ thống Pharmacare AI](/ThucTapTotNghiep/images/kientruc3.jpg)
 
 #### 1. Khởi tạo Dự án Backend
 
